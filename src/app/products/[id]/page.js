@@ -1,5 +1,5 @@
 // import { AutoComplete, Button, Input, Select } from "antd";
-
+// "use client";
 export default function Product({ params }) {
   const { id } = params;
   const name = `Shaving machine v${id}`;
@@ -19,10 +19,10 @@ export default function Product({ params }) {
           {/* <Input className="w-[100%]" placeholder="Type here..."/> */}
           {/* <Button type="default">Search</Button> */}
         </div>
-        <div>{/* <Select className="w-20"></Select> */}</div>
+        
         {productInfo.map((info) => (
           <p>
-            <span className="text-blue-500 font-black border-l-4 border-blue-500 pl-2">
+            <span key={info.item} className="text-blue-500 font-black border-l-4 border-blue-500 pl-2">
               {info.item} :{" "}
             </span>
             {info.value}
