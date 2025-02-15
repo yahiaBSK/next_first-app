@@ -1,8 +1,7 @@
 // import { AutoComplete, Button, Input, Select } from "antd";
-import { LoadableContext } from "next/dist/shared/lib/loadable-context.shared-runtime";
 
-export default async function Product({ params }) {
-  const { id } = await params;
+export default function Product({ params }) {
+  const { id } = params;
   const name = `Shaving machine v${id}`;
   const productInfo = [
     { item: "Product name", value: name },
@@ -20,9 +19,7 @@ export default async function Product({ params }) {
           {/* <Input className="w-[100%]" placeholder="Type here..."/> */}
           {/* <Button type="default">Search</Button> */}
         </div>
-        <div>
-          {/* <Select className="w-20"></Select> */}
-        </div>
+        <div>{/* <Select className="w-20"></Select> */}</div>
         {productInfo.map((info) => (
           <p>
             <span className="text-blue-500 font-black border-l-4 border-blue-500 pl-2">
