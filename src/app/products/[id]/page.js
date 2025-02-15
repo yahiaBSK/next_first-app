@@ -1,15 +1,35 @@
 // import { AutoComplete, Button, Input, Select } from "antd";
 "use client";
 
+import axios from "axios";
 import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Product({ params }) {
   const { id } = useParams();
+
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const renderProducts = async () => {
+    const data = await axios.get("https://fakestoreapi.com/products");
+    setProducts(data.data);
+    setLoading(false);
+  };
+  useEffect(() => {
+    renderProducts();
+  }, []);
+  products && console.log(products);
+
   const name = `Shaving machine v${id}`;
-  const productInfo = [
-    { item: "Product name", value: name },
-    { item: "Price", value: id + 20 },
-    { item: "Left", value: id - 2 },
+
+  const p = products?.find((item) => item.id == id);
+  console.log(p);
+
+  const productInfo = p && [
+    { item: "Product name", value: p.title },
+    { item: "Price", value: p.price },
+    { item: "Left", value: p.description },
   ];
   return (
     <div className="mainDiv">
@@ -22,15 +42,19 @@ export default function Product({ params }) {
           {/* <Input className="w-[100%]" placeholder="Type here..."/> */}
           {/* <Button type="default">Search</Button> */}koin
         </div>
-        
-        {productInfo.map((info) => (
-          <p>
-            <span key={info.item} className="text-blue-500 font-black border-l-4 border-blue-500 pl-2">
-              {info.item} :{" "}
-            </span>
-            {info.value}
-          </p>
-        ))}
+        {loading && <p>Loading...</p>}
+        {p &&
+          productInfo.map((info) => (
+            <p>
+              <span
+                key={info.item}
+                className="text-blue-500 font-black border-l-4 border-blue-500 pl-2"
+              >
+                {info.item} :{" "}
+              </span>
+              {info.value}
+            </p>
+          ))}
       </div>
     </div>
   );
