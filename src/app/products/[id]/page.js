@@ -1,12 +1,16 @@
 "use client";
 
 import axios from "axios";
-import { useParams } from "next/navigation";
+// import { useParam } from "next/navigation";
+import { useRouter, useSearchParams, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function Product({ params }) {
-  const { id } = useParams();
-
+export default function Product() {
+  const router = useRouter();
+  const params = useParams()
+  const {id} = params;
+  console.log(id);
+  
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
