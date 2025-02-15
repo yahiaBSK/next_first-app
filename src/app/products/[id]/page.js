@@ -1,7 +1,10 @@
 // import { AutoComplete, Button, Input, Select } from "antd";
-// "use client";
+"use client";
+
+import { useParams } from "next/navigation";
+
 export default function Product({ params }) {
-  const { id } = params;
+  const { id } = useParams();
   const name = `Shaving machine v${id}`;
   const productInfo = [
     { item: "Product name", value: name },
@@ -17,7 +20,7 @@ export default function Product({ params }) {
       <div className="product-info flex flex-col gap-3">
         <div className="border border-white/15 rounded-sm p-4 flex flex-row gap-2 max-w-[25%] mb-4">
           {/* <Input className="w-[100%]" placeholder="Type here..."/> */}
-          {/* <Button type="default">Search</Button> */}
+          {/* <Button type="default">Search</Button> */}koin
         </div>
         
         {productInfo.map((info) => (
